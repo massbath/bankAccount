@@ -3,6 +3,7 @@ package com.vassant.kata.domain;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class BankAccountTest {
 
@@ -31,4 +32,20 @@ public class BankAccountTest {
         assertThat(account.getBalance()).isEqualTo(Balance.of(100 + 200 + 300));
     }
 
+
+    @Test
+    public void withdraw_some_amount_from_account_should_be_remove_from_balance() {
+        BankAccount account = new BankAccount(Balance.of(200));
+
+        account.withdraw(AN_AMOUNT_OF_100);
+
+        assertThat(account.getBalance()).isEqualTo(Balance.of(100));
+    }
+
+    @Test
+    public void withdraw_more_than_my_saving_should_be_forbidden() {
+        BankAccount bankAccount = new BankAccount(Balance.of(100));
+
+        assertThatThrownBy(() -> bankAccount.withdraw(AN_AMOUNT_OF_300)).isInstanceOf(NotEnoughSavingsException.class);
+    }
 }
