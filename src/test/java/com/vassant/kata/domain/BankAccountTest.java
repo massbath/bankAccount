@@ -1,14 +1,34 @@
 package com.vassant.kata.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BankAccountTest {
 
+    private static final Amount AN_AMOUNT_OF_100 = Amount.of(100);
+    private static final Amount AN_AMOUNT_OF_200 = Amount.of(200);
+    private static final Amount AN_AMOUNT_OF_300 = Amount.of(300);
+
+
     @Test
-    public void given_a_deposit_on_a_account_balance_should_return_the_amount_of_deposit() {
-        BankAccount account = new BankAccount(Balance.of(0));
-        account.deposit(Amount.of(100));
-        Assertions.assertThat(account.getBalance()).isEqualTo(Balance.of(100));
+    public void a_deposit_on_a_account_should_change_the_balance_to_be_equal_to_the_amount_of_deposit() {
+        BankAccount account = new BankAccount( Balance.of(0));
+
+        account.deposit(AN_AMOUNT_OF_100);
+
+        assertThat(account.getBalance()).isEqualTo(Balance.of(100));
     }
+
+    @Test
+    public void many_deposit_on_a_account_should_change_the_balance_to_be_equal_to_the_sum_of_amount_of_deposit() {
+        BankAccount account = new BankAccount( Balance.of(0));
+
+        account.deposit(AN_AMOUNT_OF_100);
+        account.deposit(AN_AMOUNT_OF_200);
+        account.deposit(AN_AMOUNT_OF_300);
+
+        assertThat(account.getBalance()).isEqualTo(Balance.of(100 + 200 + 300));
+    }
+
 }

@@ -1,20 +1,22 @@
 package com.vassant.kata.domain;
 
 import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-@Value
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@EqualsAndHashCode
+@ToString
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 class Balance {
 
-    private final int value;
+    private int value;
 
     static Balance of(int value) {
         return new Balance(value);
     }
 
     void add(Amount amount) {
-        Balance.of(value + amount.getValue());
+        value += amount.getValue();
     }
 }

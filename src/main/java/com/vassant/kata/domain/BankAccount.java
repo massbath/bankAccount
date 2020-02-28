@@ -1,14 +1,14 @@
 package com.vassant.kata.domain;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 final class BankAccount {
 
-    private Balance balance;
+    private final Balance balance;
 
      void deposit(Amount amount) {
-         this.balance.add(amount);
+         balance.add(amount);
     }
 
      Balance getBalance() {
