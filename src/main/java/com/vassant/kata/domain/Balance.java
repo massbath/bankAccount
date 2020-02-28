@@ -16,11 +16,15 @@ class Balance {
         return new Balance(value);
     }
 
-    void add(Amount amount) {
+    static Balance of(Balance balance) {
+        return of(balance.value);
+    }
+
+    void deposit(Amount amount) {
         value += amount.getValue();
     }
 
-    void remove(Amount amount) {
+    void withdraw(Amount amount) {
         value -= amount.getValue();
     }
 
