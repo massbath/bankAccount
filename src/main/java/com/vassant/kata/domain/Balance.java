@@ -23,4 +23,8 @@ class Balance {
     void remove(Amount amount) {
         value -= amount.getValue();
     }
+
+    boolean hasEnoughSavings(Amount amount) {
+        return value >= amount.getValue();
+    }
 }

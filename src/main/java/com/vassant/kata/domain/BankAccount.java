@@ -12,6 +12,9 @@ final class BankAccount {
     }
 
     void withdraw(Amount amount) {
+        if(!balance.hasEnoughSavings(amount)){
+            throw new NotEnoughSavingsException();
+        }
         balance.remove(amount);
     }
 

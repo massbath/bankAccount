@@ -33,6 +33,4 @@ public class BankAccountAcceptanceTest {
 
         assertThat(bankAccount.getBalance()).isEqualTo(Balance.of(expectedBalance));
     }
-
-
 }
