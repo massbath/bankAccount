@@ -22,9 +22,9 @@ final class BankAccount {
     }
 
     void withdraw(Amount amount) {
-        if (!balance.hasEnoughSavings(amount)) {
+        if (!balance.hasEnoughSavings(amount))
             throw new NotEnoughSavingsException();
-        }
+
         balance.withdraw(amount);
         saveOperation(amount, WITHDRAW);
     }
@@ -38,8 +38,8 @@ final class BankAccount {
                 .build());
     }
 
-    Balance getBalance() {
-        return balance;
+    Balance balance() {
+        return Balance.of(balance);
     }
 
     History getHistory() {

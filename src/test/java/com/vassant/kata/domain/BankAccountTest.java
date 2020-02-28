@@ -29,7 +29,7 @@ public class BankAccountTest {
 
         account.deposit(AN_AMOUNT_OF_100);
 
-        assertThat(account.getBalance()).isEqualTo(Balance.of(100));
+        assertThat(account.balance()).isEqualTo(Balance.of(100));
     }
 
     @Test
@@ -40,7 +40,7 @@ public class BankAccountTest {
         account.deposit(AN_AMOUNT_OF_200);
         account.deposit(AN_AMOUNT_OF_300);
 
-        assertThat(account.getBalance()).isEqualTo(Balance.of(100 + 200 + 300));
+        assertThat(account.balance()).isEqualTo(Balance.of(100 + 200 + 300));
     }
 
 
@@ -50,7 +50,7 @@ public class BankAccountTest {
 
         account.withdraw(AN_AMOUNT_OF_100);
 
-        assertThat(account.getBalance()).isEqualTo(Balance.of(100));
+        assertThat(account.balance()).isEqualTo(Balance.of(100));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class BankAccountTest {
         account.withdraw(AN_AMOUNT_OF_100);
         account.withdraw(AN_AMOUNT_OF_100);
 
-        assertThat(account.getBalance()).isEqualTo(Balance.of(0));
+        assertThat(account.balance()).isEqualTo(Balance.of(0));
     }
 
 
