@@ -19,4 +19,8 @@ class Balance {
     void add(Amount amount) {
         value += amount.getValue();
     }
+
+    void remove(Amount amount) {
+        value -= amount.getValue();
+    }
 }

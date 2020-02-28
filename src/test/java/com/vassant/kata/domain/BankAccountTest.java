@@ -31,4 +31,14 @@ public class BankAccountTest {
         assertThat(account.getBalance()).isEqualTo(Balance.of(100 + 200 + 300));
     }
 
+
+    @Test
+    public void withdraw_some_amount_from_account_should_be_remove_from_balance() {
+        BankAccount account = new BankAccount(Balance.of(200));
+
+        account.withdraw(AN_AMOUNT_OF_100);
+
+        assertThat(account.getBalance()).isEqualTo(Balance.of(100));
+    }
+
 }

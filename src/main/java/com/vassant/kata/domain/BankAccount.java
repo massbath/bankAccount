@@ -11,6 +11,10 @@ final class BankAccount {
          balance.add(amount);
     }
 
+    void withdraw(Amount amount) {
+        balance.remove(amount);
+    }
+
      Balance getBalance() {
        return balance;
     }

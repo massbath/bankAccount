@@ -6,6 +6,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @RunWith(JUnitParamsRunner.class)
 public class BankAccountAcceptanceTest {
     @Test
@@ -19,4 +21,15 @@ public class BankAccountAcceptanceTest {
 
         Assertions.assertThat(bankAccount.getBalance()).isEqualTo(Balance.of(finaleBalance));
     }
+
+    @Test
+    public void withdraw_some_amount_from_account_should_be_remove_from_balance() {
+        BankAccount bankAccount = new BankAccount(Balance.of(100));
+
+        bankAccount.withdraw(Amount.of(50));
+
+        assertThat(bankAccount.getBalance()).isEqualTo(Balance.of(50));
+    }
+
+
 }
