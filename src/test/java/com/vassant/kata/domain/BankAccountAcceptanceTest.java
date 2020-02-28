@@ -23,12 +23,15 @@ public class BankAccountAcceptanceTest {
     }
 
     @Test
-    public void withdraw_some_amount_from_account_should_be_remove_from_balance() {
-        BankAccount bankAccount = new BankAccount(Balance.of(100));
+    @Parameters({"100,100,0",
+            "100,100,0"
+    })
+    public void withdraw_some_amount_from_account_should_be_remove_from_balance(int initialBalance, int amountOfWithDraw, int expectedBalance) {
+        BankAccount bankAccount = new BankAccount(Balance.of(initialBalance));
 
-        bankAccount.withdraw(Amount.of(50));
+        bankAccount.withdraw(Amount.of(amountOfWithDraw));
 
-        assertThat(bankAccount.getBalance()).isEqualTo(Balance.of(50));
+        assertThat(bankAccount.getBalance()).isEqualTo(Balance.of(expectedBalance));
     }
 
 
