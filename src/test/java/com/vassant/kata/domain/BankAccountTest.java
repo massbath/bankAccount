@@ -89,4 +89,23 @@ public class BankAccountTest {
 
         verify(operations).save(operationToSaveExpected);
     }
+
+    @Test
+    public void withdraw_should_be_save_in_operations() {
+        BankAccount account = new BankAccount( Balance.of(100),operations,clock);
+        LocalDate now = LocalDate.now();
+
+        when(clock.getActualDate()).thenReturn(now);
+
+        Operation operationToSaveExpected = Operation.builder()
+                .operationType(OperationType.WITHDRAW)
+                .amount(AN_AMOUNT_OF_100)
+                .balance(Balance.of(0))
+                .date(now)
+                .build();
+
+        account.withdraw(AN_AMOUNT_OF_100);
+
+        verify(operations).save(operationToSaveExpected);
+    }
 }

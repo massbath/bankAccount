@@ -57,4 +57,19 @@ public class BankAccountAcceptanceTest {
 
         assertThat(account.getHistory()).isEqualTo(historyExpected);
     }
+
+    @Test
+    public void withdraws_on_account_should_appear_in_the_historic() {
+
+        BankAccount account = new BankAccount(Balance.of(500),operations,fakeClock);
+        History historyExpected =  History.builder()
+                .operation(Operation.builder().operationType(OperationType.WITHDRAW).date(TODAY).amount(Amount.of(100)).balance(Balance.of(400)).build())
+                .operation(Operation.builder().operationType(OperationType.WITHDRAW).date(TODAY).amount(Amount.of(200)).balance(Balance.of(200)).build())
+                .build();
+
+        account.withdraw(Amount.of(100));
+        account.withdraw(Amount.of(200));
+
+        assertThat(account.getHistory()).isEqualTo(historyExpected);
+    }
 }
