@@ -1,6 +1,6 @@
 package com.vassant.kata.domain.adapters;
 
-import com.vassant.kata.domain.Clock;
+import com.vassant.kata.domain.ports.Clock;
 
 import java.time.LocalDate;
 

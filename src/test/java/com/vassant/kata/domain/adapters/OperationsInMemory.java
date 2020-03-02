@@ -1,7 +1,7 @@
 package com.vassant.kata.domain.adapters;
 
 import com.vassant.kata.domain.Operation;
-import com.vassant.kata.domain.Operations;
+import com.vassant.kata.domain.ports.Operations;
 
 import java.util.ArrayList;
 import java.util.List;
