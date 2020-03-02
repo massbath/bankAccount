@@ -1,4 +1,6 @@
-package com.vassant.kata.domain;
+package com.vassant.kata.domain.ports;
+
+import com.vassant.kata.domain.Operation;
 
 import java.util.List;
 

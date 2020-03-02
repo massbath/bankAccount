@@ -1,4 +1,4 @@
-package com.vassant.kata.domain;
+package com.vassant.kata.domain.ports;
 
 import java.time.LocalDate;
 

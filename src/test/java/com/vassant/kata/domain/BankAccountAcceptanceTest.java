@@ -2,6 +2,8 @@ package com.vassant.kata.domain;
 
 import com.vassant.kata.domain.adapters.FakeClock;
 import com.vassant.kata.domain.adapters.OperationsInMemory;
+import com.vassant.kata.domain.ports.Clock;
+import com.vassant.kata.domain.ports.Operations;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;

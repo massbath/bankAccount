@@ -1,5 +1,7 @@
 package com.vassant.kata.domain;
 
+import com.vassant.kata.domain.ports.Clock;
+import com.vassant.kata.domain.ports.Operations;
 import lombok.RequiredArgsConstructor;
 
 import static com.vassant.kata.domain.OperationType.DEPOSIT;
