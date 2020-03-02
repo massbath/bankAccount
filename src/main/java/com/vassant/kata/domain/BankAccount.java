@@ -2,12 +2,8 @@ package com.vassant.kata.domain;
 
 import lombok.RequiredArgsConstructor;
 
-import java.util.Comparator;
-import java.util.List;
-
 import static com.vassant.kata.domain.OperationType.DEPOSIT;
 import static com.vassant.kata.domain.OperationType.WITHDRAW;
-import static java.util.Collections.unmodifiableList;
 
 @RequiredArgsConstructor
 final class BankAccount {
@@ -43,8 +39,7 @@ final class BankAccount {
     }
 
     History getHistory() {
-        List<Operation> allOperations = operations.all();
-        allOperations.sort(Comparator.comparing(Operation::getDate));
-        return History.builder().operations(unmodifiableList(allOperations)).build();
+        return History.from(operations.all());
     }
+
 }
