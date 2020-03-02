@@ -9,7 +9,7 @@ import static java.util.Collections.unmodifiableList;
 
 
 @Value
-final class History {
+public final class History {
     List<Operation> operations;
 
     static History from(List<Operation> allOperations) {

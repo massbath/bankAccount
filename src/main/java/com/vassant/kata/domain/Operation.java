@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Value
 @Builder
-public class Operation {
+public final class Operation {
     private LocalDate date;
     private OperationType operationType;
     private Amount amount;
