@@ -3,12 +3,12 @@ package com.vassant.kata.domain;
 import lombok.Builder;
 import lombok.Value;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Value
 @Builder
 public final class Operation {
-    private LocalDate date;
+    private LocalDateTime date;
     private OperationType operationType;
     private Amount amount;
     private Balance balance;

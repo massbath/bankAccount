@@ -16,16 +16,12 @@ public final class Balance {
         return new Balance(value);
     }
 
-    static Balance of(Balance balance) {
-        return of(balance.value);
+    Balance deposit(Amount amount) {
+        return Balance.of(value + amount.getValue());
     }
 
-    void deposit(Amount amount) {
-        value += amount.getValue();
-    }
-
-    void withdraw(Amount amount) {
-        value -= amount.getValue();
+    Balance withdraw(Amount amount) {
+        return Balance.of(value - amount.getValue());
     }
 
     boolean hasEnoughSavings(Amount amount) {
