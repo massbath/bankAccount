@@ -3,21 +3,27 @@ package com.vassant.kata.domain;
 import com.vassant.kata.domain.ports.BankAccountOperations;
 import com.vassant.kata.domain.ports.Clock;
 import com.vassant.kata.domain.ports.Operations;
-import lombok.RequiredArgsConstructor;
+
+import java.util.Comparator;
 
 import static com.vassant.kata.domain.OperationType.DEPOSIT;
 import static com.vassant.kata.domain.OperationType.WITHDRAW;
 
-@RequiredArgsConstructor
 final class BankAccount implements BankAccountOperations {
 
-    private final Balance balance;
+    private  Balance balance;
     private final Operations operations;
     private final Clock clock;
 
+    public BankAccount(Balance balance, Operations operations, Clock clock) {
+        this.balance = balance;
+        this.operations = operations;
+        this.clock = clock;
+    }
+
     @Override
     public void deposit(Amount amount) {
-        balance.deposit(amount);
+        balance = balance.deposit(amount);
         saveOperation(amount, DEPOSIT);
     }
 
@@ -26,13 +32,16 @@ final class BankAccount implements BankAccountOperations {
         if (!balance.hasEnoughSavings(amount))
             throw new NotEnoughSavingsException();
 
-        balance.withdraw(amount);
+        balance = balance.withdraw(amount);
         saveOperation(amount, WITHDRAW);
     }
 
     @Override
     public Balance balance() {
-        return Balance.of(balance);
+        return operations.all().stream()
+                .max(Comparator.comparing(Operation::getDate))
+                .map(Operation::getBalance)
+                .orElse(Balance.of(0));
     }
 
     @Override
@@ -45,7 +54,7 @@ final class BankAccount implements BankAccountOperations {
                 .operationType(deposit)
                 .date(clock.getActualDate())
                 .amount(amount)
-                .balance(Balance.of(balance))
+                .balance(balance)
                 .build());
     }
 
