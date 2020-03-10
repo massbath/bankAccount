@@ -18,6 +18,5 @@ public class FakeClock implements Clock {
         final LocalDateTime dateToReturn = this.startDateToReturn.plusDays(datesReturned.size());
         this.datesReturned.add(dateToReturn);
         return dateToReturn;
-
     }
 }
