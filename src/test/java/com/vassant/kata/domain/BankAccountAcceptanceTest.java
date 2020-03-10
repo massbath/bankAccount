@@ -5,17 +5,14 @@ import com.vassant.kata.domain.adapters.OperationsInMemory;
 import com.vassant.kata.domain.ports.BankAccountOperations;
 import com.vassant.kata.domain.ports.Clock;
 import com.vassant.kata.domain.ports.Operations;
-import junitparams.JUnitParamsRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(JUnitParamsRunner.class)
-public class BankAccountAcceptanceTest {
+class BankAccountAcceptanceTest {
 
     private static final LocalDateTime TODAY = LocalDateTime.now();
     private final Clock fakeClock = new FakeClock(TODAY);
@@ -23,7 +20,7 @@ public class BankAccountAcceptanceTest {
     private Amount aAmountOf100 = Amount.of(100);
 
     @Test
-    public void all_operations_on_account_should_appear_in_the_history() {
+    void all_operations_on_account_should_appear_in_the_history() {
         BankAccountOperations bankAccount = new BankAccount(operations, fakeClock);
 
         History historyExpected = History.from(asList(

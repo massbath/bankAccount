@@ -7,8 +7,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-
-public class HistoryTest {
+ class HistoryTest {
 
     @Test
     void should_sort_operations_by_date() {
