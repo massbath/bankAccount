@@ -4,14 +4,14 @@ import com.vassant.kata.domain.Operation;
 import com.vassant.kata.domain.ports.Operations;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class OperationsInMemory implements Operations {
 
-    private final List<Operation> operations = new ArrayList<>();
+    private final Collection<Operation> operations = new ArrayList<>();
 
     @Override
-    public List<Operation> all() {
+    public Collection<Operation> all() {
         return operations;
     }
 
