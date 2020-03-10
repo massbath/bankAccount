@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -30,21 +31,14 @@ class BankAccountTest {
     @BeforeEach
     void setup() {
         bankAccount = new BankAccount(operations, clock);
+        lenient().when(clock.getActualDate()).thenReturn(NOW);
     }
 
     @Nested
     class deposit {
         @Test
         void should_be_save_in_operations() {
-
-            when(clock.getActualDate()).thenReturn(NOW);
-
-            Operation operationToSaveExpected = Operation.builder()
-                    .operationType(OperationType.DEPOSIT)
-                    .amount(AN_AMOUNT_OF_100)
-                    .balance(Balance.of(100))
-                    .date(NOW)
-                    .build();
+            Operation operationToSaveExpected = aOperation(OperationType.DEPOSIT, 100);
 
             bankAccount.deposit(AN_AMOUNT_OF_100);
 
@@ -52,34 +46,33 @@ class BankAccountTest {
         }
 
     }
+
     @Nested
     class withdraw {
+
         @Test
         void should_be_save_in_operations() {
-            when(clock.getActualDate()).thenReturn(NOW);
-            when(operations.all()).thenReturn(Collections.singletonList(Operation.builder()
-                    .operationType(OperationType.DEPOSIT)
-                    .amount(AN_AMOUNT_OF_100)
-                    .balance(Balance.of(100))
-                    .date(NOW)
-                    .build()));
-
-            Operation operationToSaveExpected = Operation.builder()
-                    .operationType(OperationType.WITHDRAW)
-                    .amount(AN_AMOUNT_OF_100)
-                    .balance(Balance.of(0))
-                    .date(NOW)
-                    .build();
-
+            when(operations.all()).thenReturn(Collections.singletonList(aOperation(OperationType.DEPOSIT, 100)));
+            Operation operationToSaveExpected = aOperation(OperationType.WITHDRAW, 0);
 
             bankAccount.withdraw(AN_AMOUNT_OF_100);
 
             verify(operations).save(operationToSaveExpected);
         }
+
         @Test
         void more_than_my_saving_should_be_forbidden() {
             assertThatThrownBy(() -> bankAccount.withdraw(AN_AMOUNT_OF_300)).isInstanceOf(NotEnoughSavingsException.class);
         }
 
+    }
+
+    private Operation aOperation(OperationType operationType, int balance) {
+        return Operation.builder()
+                .operationType(operationType)
+                .amount(AN_AMOUNT_OF_100)
+                .balance(Balance.of(balance))
+                .date(NOW)
+                .build();
     }
 }
