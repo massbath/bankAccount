@@ -24,10 +24,10 @@ class BankAccountAcceptanceTest {
         BankAccountOperations bankAccount = new BankAccount(operations, fakeClock);
 
         History historyExpected = History.from(asList(
-                Operation.builder().operationType(OperationType.DEPOSIT).date(TODAY).amount(aAmountOf100).balance(Balance.of(100)).build(),
-                Operation.builder().operationType(OperationType.DEPOSIT).date(TODAY.plusDays(1)).amount(aAmountOf100).balance(Balance.of(200)).build(),
-                Operation.builder().operationType(OperationType.WITHDRAW).date(TODAY.plusDays(2)).amount(aAmountOf100).balance(Balance.of(100)).build(),
-                Operation.builder().operationType(OperationType.DEPOSIT).date(TODAY.plusDays(3)).amount(aAmountOf100).balance(Balance.of(200)).build()));
+                aOperation(OperationType.DEPOSIT, TODAY, 100),
+                aOperation(OperationType.DEPOSIT, TODAY.plusDays(1), 200),
+                aOperation(OperationType.WITHDRAW, TODAY.plusDays(2), 100),
+                aOperation(OperationType.DEPOSIT, TODAY.plusDays(3), 200)));
 
         bankAccount.deposit(aAmountOf100);
         bankAccount.deposit(aAmountOf100);
@@ -35,6 +35,10 @@ class BankAccountAcceptanceTest {
         bankAccount.deposit(aAmountOf100);
 
         assertThat(bankAccount.history()).isEqualTo(historyExpected);
+    }
+
+    private Operation aOperation(OperationType operationType, LocalDateTime dateOperation, int balance) {
+        return Operation.builder().operationType(operationType).date(dateOperation).amount(aAmountOf100).balance(Balance.of(balance)).build();
     }
 
 
