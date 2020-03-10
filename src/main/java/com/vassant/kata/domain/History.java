@@ -2,18 +2,25 @@ package com.vassant.kata.domain;
 
 import lombok.Value;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Collection;
 
-import static java.util.Collections.unmodifiableList;
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toUnmodifiableList;
 
 
 @Value
 public final class History {
-    List<Operation> operations;
+    Collection<Operation> operations;
 
-    static History from(List<Operation> allOperations) {
-        allOperations.sort(Comparator.comparing(Operation::getDate));
-        return new History(unmodifiableList(allOperations));
+    private History(Collection<Operation> operations) {
+        this.operations = operations;
+    }
+
+    static History from(Collection<Operation> allOperations) {
+        Collection<Operation> operationByDate = allOperations.stream()
+                .sorted(comparing(Operation::getDate))
+                .collect(toUnmodifiableList());
+
+        return new History(operationByDate);
     }
 }
