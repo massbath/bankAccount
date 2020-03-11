@@ -3,6 +3,8 @@ package com.vassant.kata.domain;
 import com.vassant.kata.domain.ports.Clock;
 import com.vassant.kata.domain.ports.Operations;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +20,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class BankAccountTest {
     @Mock
     private Operations operations;
@@ -35,7 +38,7 @@ class BankAccountTest {
     }
 
     @Nested
-    class deposit {
+    class Deposit {
         @Test
         void should_be_save_in_operations() {
             Operation operationToSaveExpected = aOperation(OperationType.DEPOSIT, 100);
@@ -48,7 +51,7 @@ class BankAccountTest {
     }
 
     @Nested
-    class withdraw {
+    class Withdraw {
 
         @Test
         void should_be_save_in_operations() {

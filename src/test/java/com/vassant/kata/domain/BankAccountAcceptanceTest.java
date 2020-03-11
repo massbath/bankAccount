@@ -5,6 +5,8 @@ import com.vassant.kata.domain.adapters.OperationsInMemory;
 import com.vassant.kata.domain.ports.BankAccountOperations;
 import com.vassant.kata.domain.ports.Clock;
 import com.vassant.kata.domain.ports.Operations;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class BankAccountAcceptanceTest {
 
     private static final LocalDateTime TODAY = LocalDateTime.now();
