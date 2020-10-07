@@ -1,58 +1,27 @@
-package com.vassant.kata.domain;
+package com.vassant.kata.domain
 
-import com.vassant.kata.domain.ports.BankAccountOperations;
-import com.vassant.kata.domain.ports.Clock;
-import com.vassant.kata.domain.ports.Operations;
+import com.vassant.kata.domain.ports.BankAccountOperations
+import com.vassant.kata.domain.ports.Clock
+import com.vassant.kata.domain.ports.Operations
 
-import java.util.Comparator;
+class BankAccount(private val operations: Operations, private val clock: Clock) : BankAccountOperations {
+    override fun deposit(amount: Amount) = saveOperation(amount, OperationType.DEPOSIT, balance().deposit(amount))
 
-import static com.vassant.kata.domain.OperationType.DEPOSIT;
-import static com.vassant.kata.domain.OperationType.WITHDRAW;
-
-final class BankAccount implements BankAccountOperations {
-
-    private final Operations operations;
-    private final Clock clock;
-
-    public BankAccount(Operations operations, Clock clock) {
-        this.operations = operations;
-        this.clock = clock;
+    override fun withdraw(amount: Amount) {
+        val balance = balance()
+        if (!balance.hasEnoughSavings(amount)) throw NotEnoughSavingsException()
+        saveOperation(amount, OperationType.WITHDRAW, balance.withdraw(amount))
     }
 
-    @Override
-    public void deposit(Amount amount) {
-        saveOperation(amount, DEPOSIT, balance().deposit(amount));
-    }
+    override fun balance(): Balance = operations.all().maxByOrNull { it.date }?.balance ?: Balance(0)
 
-    @Override
-    public void withdraw(Amount amount) {
-        Balance balance = balance();
-        if (!balance.hasEnoughSavings(amount))
-            throw new NotEnoughSavingsException();
+    override fun history(): History = History.from(operations.all())
 
-        saveOperation(amount, WITHDRAW,balance.withdraw(amount));
-    }
-
-    @Override
-    public Balance balance() {
-        return operations.all().stream()
-                .max(Comparator.comparing(Operation::getDate))
-                .map(Operation::getBalance)
-                .orElse(Balance.of(0));
-    }
-
-    @Override
-    public History history() {
-        return History.from(operations.all());
-    }
-
-    private void saveOperation(Amount amount, OperationType deposit, Balance balance) {
-        operations.save(Operation.builder()
-                .operationType(deposit)
-                .date(clock.getActualDate())
-                .amount(amount)
-                .balance(balance)
-                .build());
-    }
-
+    private fun saveOperation(amount: Amount, deposit: OperationType, balance: Balance) =
+            operations.save(Operation.builder()
+                    .operationType(deposit)
+                    .date(clock.actualDate)
+                    .amount(amount)
+                    .balance(balance)
+                    .build())
 }
