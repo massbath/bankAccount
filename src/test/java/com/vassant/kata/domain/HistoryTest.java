@@ -20,7 +20,7 @@ class HistoryTest {
         LocalDateTime NEXT_WEEK = TODAY.plusWeeks(1);
         List<Operation> operations = asList(aOperationAt(TOMORROW), aOperationAt(TODAY), aOperationAt(NEXT_WEEK));
 
-        History history = History.from(operations);
+        History history = new History(operations);
 
         assertThat(history.getOperations()).extracting("date").containsExactly(TODAY, TOMORROW, NEXT_WEEK);
     }

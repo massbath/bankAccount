@@ -26,7 +26,7 @@ class BankAccountAcceptanceTest {
     void all_operations_on_account_should_appear_in_the_history() {
         BankAccountOperations bankAccount = new BankAccount(operations, fakeClock);
 
-        History historyExpected = History.from(asList(
+        History historyExpected = new History(asList(
                 aOperation(OperationType.DEPOSIT, TODAY, 100),
                 aOperation(OperationType.DEPOSIT, TODAY.plusDays(1), 200),
                 aOperation(OperationType.WITHDRAW, TODAY.plusDays(2), 100),
