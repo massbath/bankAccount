@@ -1,9 +1,9 @@
 package com.vassant.kata.domain
 
 data class Balance(private val value: Int) {
-    fun deposit(amount: Amount): Balance = Balance(value + amount)
+    infix fun deposit(amount: Amount): Balance = Balance(value + amount)
 
-    fun withdraw(amount: Amount): Balance = Balance(value - amount)
+    infix fun withdraw(amount: Amount): Balance = Balance(value - amount)
 
     fun hasEnoughSavings(amount: Amount): Boolean = value >= amount.value
 
