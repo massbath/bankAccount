@@ -1,4 +1,3 @@
-package com.vassant.kata.domain;
+package com.vassant.kata.domain
 
-public class NegativeAmountNotAllowedException extends RuntimeException {
-}
+class NegativeAmountNotAllowedException : RuntimeException()

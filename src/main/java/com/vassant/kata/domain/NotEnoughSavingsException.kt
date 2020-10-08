@@ -1,4 +1,3 @@
-package com.vassant.kata.domain;
+package com.vassant.kata.domain
 
-class NotEnoughSavingsException  extends RuntimeException{
-}
+class NotEnoughSavingsException : RuntimeException()
