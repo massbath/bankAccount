@@ -20,7 +20,7 @@ class BankAccountAcceptanceTest {
     private static final LocalDateTime TODAY = LocalDateTime.now();
     private final Clock fakeClock = new FakeClock(TODAY);
     private Operations operations = new OperationsInMemory();
-    private Amount aAmountOf100 = Amount.of(100);
+    private Amount aAmountOf100 = new Amount(100);
 
     @Test
     void all_operations_on_account_should_appear_in_the_history() {

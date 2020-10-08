@@ -26,6 +26,6 @@ class HistoryTest {
     }
 
     private Operation aOperationAt(LocalDateTime TOMORROW) {
-        return new Operation(TOMORROW, OperationType.DEPOSIT, Amount.of(100), Balance.of(0));
+        return new Operation(TOMORROW, OperationType.DEPOSIT, new Amount(100), Balance.of(0));
     }
 }

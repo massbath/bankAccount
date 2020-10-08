@@ -26,8 +26,8 @@ class BankAccountTest {
     private Operations operations;
     @Mock
     private Clock clock;
-    private static final Amount AN_AMOUNT_OF_100 = Amount.of(100);
-    private static final Amount AN_AMOUNT_OF_300 = Amount.of(300);
+    private static final Amount AN_AMOUNT_OF_100 = new Amount(100);
+    private static final Amount AN_AMOUNT_OF_300 = new Amount(300);
     private static final LocalDateTime NOW = LocalDateTime.now();
     private BankAccount bankAccount;
 
