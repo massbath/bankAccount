@@ -1,5 +1,5 @@
-package com.vassant.kata.domain;
+package com.vassant.kata.domain
 
-public enum OperationType {
+enum class OperationType {
     WITHDRAW, DEPOSIT
 }

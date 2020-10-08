@@ -23,6 +23,6 @@ I want to make a withdrawal from my account
 
 ### US 3
 
-In order to check my operations
+In order to check my operationJavas
 As a bank client
-I want to see the history (operation,date,amount,balance) of my operations
+I want to see the history (operationJava,date,amount,balance) of my operationJavas

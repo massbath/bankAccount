@@ -71,11 +71,6 @@ class BankAccountTest {
     }
 
     private Operation aOperation(OperationType operationType, int balance) {
-        return Operation.builder()
-                .operationType(operationType)
-                .amount(AN_AMOUNT_OF_100)
-                .balance(Balance.of(balance))
-                .date(NOW)
-                .build();
+        return new Operation(NOW, operationType, AN_AMOUNT_OF_100, Balance.of(balance));
     }
 }

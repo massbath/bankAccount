@@ -18,14 +18,14 @@ class HistoryTest {
         LocalDateTime TODAY = LocalDateTime.now();
         LocalDateTime TOMORROW = TODAY.plusDays(1);
         LocalDateTime NEXT_WEEK = TODAY.plusWeeks(1);
-        List<Operation> operations = asList(aOperationAt(TOMORROW), aOperationAt(TODAY), aOperationAt(NEXT_WEEK));
+        List<Operation> operation = asList(aOperationAt(TOMORROW), aOperationAt(TODAY), aOperationAt(NEXT_WEEK));
 
-        History history = new History(operations);
+        History history = new History(operation);
 
-        assertThat(history.getOperations()).extracting("date").containsExactly(TODAY, TOMORROW, NEXT_WEEK);
+        assertThat(history.getOperation()).extracting("date").containsExactly(TODAY, TOMORROW, NEXT_WEEK);
     }
 
     private Operation aOperationAt(LocalDateTime TOMORROW) {
-        return Operation.builder().date(TOMORROW).build();
+        return new Operation(TOMORROW, OperationType.DEPOSIT, Amount.of(100), Balance.of(0));
     }
 }

@@ -41,7 +41,7 @@ class BankAccountAcceptanceTest {
     }
 
     private Operation aOperation(OperationType operationType, LocalDateTime dateOperation, int balance) {
-        return Operation.builder().operationType(operationType).date(dateOperation).amount(aAmountOf100).balance(Balance.of(balance)).build();
+        return new Operation(dateOperation, operationType, aAmountOf100, Balance.of(balance));
     }
 
 

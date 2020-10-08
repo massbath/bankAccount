@@ -17,11 +17,11 @@ class BankAccount(private val operations: Operations, private val clock: Clock) 
 
     override fun history(): History = History(operations.all())
 
-    private fun saveOperation(amount: Amount, deposit: OperationType, balance: Balance) =
-            operations.save(Operation.builder()
-                    .operationType(deposit)
-                    .date(clock.actualDate)
-                    .amount(amount)
-                    .balance(balance)
-                    .build())
+    private fun saveOperation(amount: Amount, deposit: OperationType, balance: Balance) = operations.save(
+            Operation(
+                    operationType = deposit,
+                    amount = amount,
+                    balance = balance,
+                    date = clock.actualDate)
+    )
 }
