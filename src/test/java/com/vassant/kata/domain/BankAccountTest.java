@@ -34,7 +34,7 @@ class BankAccountTest {
     @BeforeEach
     void setup() {
         bankAccount = new BankAccount(operations, clock);
-        lenient().when(clock.getActualDate()).thenReturn(NOW);
+        lenient().when(clock.actualDate()).thenReturn(NOW);
     }
 
     @Nested
@@ -45,7 +45,7 @@ class BankAccountTest {
 
             bankAccount.deposit(AN_AMOUNT_OF_100);
 
-            verify(operations).save(operationToSaveExpected);
+            verify(operations).add(operationToSaveExpected);
         }
 
     }
@@ -60,7 +60,7 @@ class BankAccountTest {
 
             bankAccount.withdraw(AN_AMOUNT_OF_100);
 
-            verify(operations).save(operationToSaveExpected);
+            verify(operations).add(operationToSaveExpected);
         }
 
         @Test

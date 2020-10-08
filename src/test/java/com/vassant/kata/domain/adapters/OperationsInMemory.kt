@@ -1,22 +1,15 @@
-package com.vassant.kata.domain.adapters;
+package com.vassant.kata.domain.adapters
 
-import com.vassant.kata.domain.Operation;
-import com.vassant.kata.domain.ports.Operations;
+import com.vassant.kata.domain.Operation
+import com.vassant.kata.domain.ports.Operations
+import java.util.*
 
-import java.util.ArrayList;
-import java.util.Collection;
+class OperationsInMemory : Operations {
+    private val operations: MutableCollection<Operation> = ArrayList()
 
-public class OperationsInMemory implements Operations {
+    override fun all(): Collection<Operation> = operations
 
-    private final Collection<Operation> operations = new ArrayList<>();
-
-    @Override
-    public Collection<Operation> all() {
-        return operations;
-    }
-
-    @Override
-    public void save(Operation operation) {
-         operations.add(operation);
+    override infix fun add(operation: Operation) {
+        operations.add(operation)
     }
 }
