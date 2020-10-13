@@ -1,7 +1,8 @@
 package com.vassant.kata.domain
 
 import com.vassant.kata.domain.Balance.Companion.of
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.groups.Tuple
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 import java.util.*
@@ -17,7 +18,11 @@ class HistoryTest {
 
         val history = History(operation)
 
-        Assertions.assertThat(history.operation).extracting("date").containsExactly(TODAY, TOMORROW, NEXT_WEEK)
+        assertThat(history.lines).extracting("operation.date", "balance")
+                .containsExactly(Tuple(TODAY, of(100)),
+                        Tuple(TOMORROW, of(200)),
+                        Tuple(NEXT_WEEK, of(300))
+                )
     }
 
     private fun aOperationAt(TOMORROW: LocalDateTime): Operation {
