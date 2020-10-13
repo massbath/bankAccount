@@ -17,7 +17,13 @@ class BankAccount(private val operations: Operations, private val clock: Clock) 
         operations add operation
     }
 
-    override fun balance(): Balance = operations.all().maxByOrNull { it.date }?.balance ?: Balance(0)
+    override fun balance(): Balance = operations.all()
+            .fold(Balance(0)) { balance, operation ->
+                when (operation) {
+                    is Withdraw -> balance withdraw operation.amount
+                    is Deposit -> balance deposit operation.amount
+                }
+            }
 
     override fun history(): History = History(operations.all())
 
