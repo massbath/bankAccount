@@ -21,6 +21,6 @@ class HistoryTest {
     }
 
     private fun aOperationAt(TOMORROW: LocalDateTime): Operation {
-        return Operation(TOMORROW, OperationType.DEPOSIT, Amount(100), of(0))
+        return Deposit(TOMORROW, Amount(100), of(0))
     }
 }

@@ -21,10 +21,10 @@ class BankAccountAcceptanceTest {
     fun `all operations on account should be searchable`() {
         val bankAccount: BankAccountOperations = BankAccount(operations, fakeClock)
         val historyExpected = History(Arrays.asList(
-                aOperation(OperationType.DEPOSIT, TODAY, 100),
-                aOperation(OperationType.DEPOSIT, TODAY.plusDays(1), 200),
-                aOperation(OperationType.WITHDRAW, TODAY.plusDays(2), 100),
-                aOperation(OperationType.DEPOSIT, TODAY.plusDays(3), 200)))
+                Deposit(TODAY, aAmountOf100, of(100)),
+                Deposit(TODAY.plusDays(1), aAmountOf100, of(200)),
+                Withdraw(TODAY.plusDays(2), aAmountOf100, of(100)),
+                Deposit(TODAY.plusDays(3), aAmountOf100, of(200))))
 
         bankAccount.deposit(aAmountOf100)
         bankAccount.deposit(aAmountOf100)
@@ -33,8 +33,5 @@ class BankAccountAcceptanceTest {
 
         Assertions.assertThat(bankAccount.history()).isEqualTo(historyExpected)
     }
-
-    private fun aOperation(operationType: OperationType, dateOperation: LocalDateTime, balance: Int): Operation =
-            Operation(dateOperation, operationType, aAmountOf100, of(balance))
 
 }

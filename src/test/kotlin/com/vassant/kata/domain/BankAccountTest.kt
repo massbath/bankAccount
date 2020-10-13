@@ -40,7 +40,7 @@ class BankAccountTest {
     inner class Deposit {
         @Test
         fun `should be save in operations`() {
-            val operationToSaveExpected = aOperation(OperationType.DEPOSIT, 100)
+            val operationToSaveExpected = Deposit(NOW, AN_AMOUNT_OF_100, of(100))
 
             bankAccount.deposit(AN_AMOUNT_OF_100)
 
@@ -53,8 +53,8 @@ class BankAccountTest {
 
         @Test
         fun `should be save in operations`() {
-            Mockito.`when`(operations.all()).thenReturn(listOf(aOperation(OperationType.DEPOSIT, 100)))
-            val operationToSaveExpected = aOperation(OperationType.WITHDRAW, 0)
+            Mockito.`when`(operations.all()).thenReturn(listOf(Deposit(NOW, AN_AMOUNT_OF_100, of(100))))
+            val operationToSaveExpected = Withdraw(NOW, AN_AMOUNT_OF_100, of(0))
 
             bankAccount.withdraw(AN_AMOUNT_OF_100)
 
@@ -67,7 +67,4 @@ class BankAccountTest {
         }
     }
 
-    private fun aOperation(operationType: OperationType, balance: Int): Operation {
-        return Operation(NOW, operationType, AN_AMOUNT_OF_100, of(balance))
-    }
 }
