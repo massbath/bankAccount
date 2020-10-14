@@ -8,7 +8,6 @@ import com.vassant.kata.domain.ports.Operations
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
-import java.util.*
 
 class BankAccountAcceptanceTest {
     private val TODAY = LocalDateTime.now()
@@ -19,18 +18,20 @@ class BankAccountAcceptanceTest {
     @Test
     fun `all operations on account should be searchable`() {
         val bankAccount: BankAccountOperations = BankAccount(operations, fakeClock)
-        val historyExpected = History(Arrays.asList(
-                Deposit(TODAY, aAmountOf100, Balance(100)),
-                Deposit(TODAY.plusDays(1), aAmountOf100, Balance(200)),
-                Withdraw(TODAY.plusDays(2), aAmountOf100, Balance(100)),
-                Deposit(TODAY.plusDays(3), aAmountOf100, Balance(200))))
+        val historyExpected = setOf(
+                HistoryLine(Deposit(TODAY, aAmountOf100), Balance(100)),
+                HistoryLine(Deposit(TODAY.plusDays(1), aAmountOf100), Balance(200)),
+                HistoryLine(Withdraw(TODAY.plusDays(2), aAmountOf100), Balance(100)),
+                HistoryLine(Deposit(TODAY.plusDays(3), aAmountOf100), Balance(200)))
 
         bankAccount.deposit(aAmountOf100)
         bankAccount.deposit(aAmountOf100)
         bankAccount.withdraw(aAmountOf100)
         bankAccount.deposit(aAmountOf100)
 
-        Assertions.assertThat(bankAccount.history()).isEqualTo(historyExpected)
+        val history = bankAccount.history()
+        Assertions.assertThat(history.lines).isEqualTo(historyExpected)
+
     }
 
 }

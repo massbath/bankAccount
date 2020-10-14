@@ -24,7 +24,6 @@ class BankAccountTest {
 
     companion object {
         private val AN_AMOUNT_OF_100 = Amount(100)
-        private val AN_AMOUNT_OF_300 = Amount(300)
         private val NOW = LocalDateTime.now()
     }
 
@@ -38,7 +37,7 @@ class BankAccountTest {
     inner class Deposit {
         @Test
         fun `should be save in operations`() {
-            val operationToSaveExpected = Deposit(NOW, AN_AMOUNT_OF_100, Balance(100))
+            val operationToSaveExpected = Deposit(NOW, AN_AMOUNT_OF_100)
 
             bankAccount.deposit(AN_AMOUNT_OF_100)
 
@@ -51,8 +50,8 @@ class BankAccountTest {
 
         @Test
         fun `should be save in operations`() {
-            Mockito.`when`(operations.all()).thenReturn(listOf(Deposit(NOW, AN_AMOUNT_OF_100, Balance(100))))
-            val operationToSaveExpected = Withdraw(NOW, AN_AMOUNT_OF_100, Balance(0))
+            Mockito.`when`(operations.all()).thenReturn(listOf(Deposit(NOW, AN_AMOUNT_OF_100)))
+            val operationToSaveExpected = Withdraw(NOW, AN_AMOUNT_OF_100)
 
             bankAccount.withdraw(AN_AMOUNT_OF_100)
 

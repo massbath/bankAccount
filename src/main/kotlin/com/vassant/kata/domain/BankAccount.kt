@@ -5,12 +5,12 @@ import com.vassant.kata.domain.ports.Clock
 import com.vassant.kata.domain.ports.Operations
 
 class BankAccount(private val operations: Operations, private val clock: Clock) : BankAccountOperations {
-    override fun deposit(amount: Amount) = addOperation(Deposit(clock.actualDate(), amount, balance() deposit amount))
+    override fun deposit(amount: Amount) = addOperation(Deposit(clock.actualDate(), amount))
 
     override fun withdraw(amount: Amount) {
         val balance = balance()
         if (!balance.hasEnoughSavings(amount)) throw NotEnoughSavingsException()
-        addOperation(Withdraw(clock.actualDate(), amount, balance withdraw amount))
+        addOperation(Withdraw(clock.actualDate(), amount))
     }
 
     private fun addOperation(operation: Operation) {
