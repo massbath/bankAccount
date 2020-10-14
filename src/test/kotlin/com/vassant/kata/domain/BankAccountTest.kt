@@ -41,7 +41,7 @@ class BankAccountTest {
 
             bankAccount.deposit(AN_AMOUNT_OF_100)
 
-            verify(operations).add(operationToSaveExpected)
+            verify(operations).save(operationToSaveExpected)
         }
     }
 
@@ -55,7 +55,7 @@ class BankAccountTest {
 
             bankAccount.withdraw(AN_AMOUNT_OF_100)
 
-            verify(operations).add(operationToSaveExpected)
+            verify(operations).save(operationToSaveExpected)
         }
     }
 

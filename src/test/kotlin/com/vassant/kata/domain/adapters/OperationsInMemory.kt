@@ -9,7 +9,7 @@ class OperationsInMemory : Operations {
 
     override fun all(): Collection<Operation> = operations
 
-    override infix fun add(operation: Operation) {
+    override infix fun save(operation: Operation) {
         operations.add(operation)
     }
 }

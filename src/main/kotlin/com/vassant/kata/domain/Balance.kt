@@ -5,8 +5,6 @@ data class Balance(private val value: Int) {
 
     infix fun withdraw(amount: Amount): Balance = Balance(value - amount)
 
-    fun hasEnoughSavings(amount: Amount): Boolean = value >= amount.value
-
     infix fun apply(operation: Operation): Balance =
             when (operation) {
                 is Withdraw -> this withdraw operation.amount
