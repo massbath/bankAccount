@@ -25,4 +25,4 @@ I want to make a withdrawal from my account
 
 In order to check my operationJavas
 As a bank client
-I want to see the history (operationJava,date,amount,balance) of my operationJavas
+I want to see the history (operation,date,amount,balance) of my operation

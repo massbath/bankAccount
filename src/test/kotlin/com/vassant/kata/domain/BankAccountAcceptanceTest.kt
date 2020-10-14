@@ -5,7 +5,7 @@ import com.vassant.kata.domain.adapters.OperationsInMemory
 import com.vassant.kata.domain.ports.BankAccountOperations
 import com.vassant.kata.domain.ports.Clock
 import com.vassant.kata.domain.ports.Operations
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -15,8 +15,19 @@ class BankAccountAcceptanceTest {
     private val operations: Operations = OperationsInMemory()
     private val aAmountOf100 = Amount(100)
 
+
     @Test
-    fun `all operations on account should be searchable`() {
+    fun `account could give its balance`() {
+        val bankAccount: BankAccountOperations = BankAccount(operations, fakeClock)
+
+        bankAccount.deposit(aAmountOf100)
+        bankAccount.withdraw(aAmountOf100)
+
+        assertThat(bankAccount.balance()).isEqualTo(Balance(0))
+    }
+
+    @Test
+    fun `all operations on account should be in history`() {
         val bankAccount: BankAccountOperations = BankAccount(operations, fakeClock)
         val historyExpected = setOf(
                 HistoryLine(Deposit(TODAY, aAmountOf100), Balance(100)),
@@ -30,8 +41,7 @@ class BankAccountAcceptanceTest {
         bankAccount.deposit(aAmountOf100)
 
         val history = bankAccount.history()
-        Assertions.assertThat(history.lines).isEqualTo(historyExpected)
-
+        assertThat(history.lines).isEqualTo(historyExpected)
     }
 
 }
