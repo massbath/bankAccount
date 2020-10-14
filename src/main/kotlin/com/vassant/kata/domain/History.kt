@@ -6,7 +6,7 @@ class History(operations: Collection<Operation>) {
     init {
         lines = operations.sortedBy { it.date }
                 .fold(mutableSetOf(), { historyLines, operation ->
-                    val actualBalance = if (historyLines.isEmpty()) Balance.of(0) else historyLines.last().balance
+                    val actualBalance = if (historyLines.isEmpty()) Balance(0) else historyLines.last().balance
                     historyLines += HistoryLine(operation, actualBalance apply operation)
                     historyLines
                 })

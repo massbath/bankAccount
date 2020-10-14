@@ -1,6 +1,5 @@
 package com.vassant.kata.domain
 
-import com.vassant.kata.domain.Balance.Companion.of
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.groups.Tuple
 import org.junit.jupiter.api.Test
@@ -19,13 +18,14 @@ class HistoryTest {
         val history = History(operation)
 
         assertThat(history.lines).extracting("operation.date", "balance")
-                .containsExactly(Tuple(TODAY, of(100)),
-                        Tuple(TOMORROW, of(200)),
-                        Tuple(NEXT_WEEK, of(300))
+                .containsExactly(
+                        Tuple(TODAY, Balance(100)),
+                        Tuple(TOMORROW, Balance(200)),
+                        Tuple(NEXT_WEEK, Balance(300))
                 )
     }
 
-    private fun aOperationAt(TOMORROW: LocalDateTime): Operation {
-        return Deposit(TOMORROW, Amount(100), of(0))
+    private fun aOperationAt(dateOperation: LocalDateTime): Operation {
+        return Deposit(dateOperation, Amount(100), Balance(0))
     }
 }

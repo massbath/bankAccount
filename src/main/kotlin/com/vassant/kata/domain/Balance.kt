@@ -7,19 +7,11 @@ data class Balance(private val value: Int) {
 
     fun hasEnoughSavings(amount: Amount): Boolean = value >= amount.value
 
-    infix fun apply(operation: Operation): Balance {
-        return when (operation) {
-            is Withdraw -> this withdraw operation.amount
-            is Deposit -> this deposit operation.amount
-        }
-    }
-
-    companion object {
-        @JvmStatic
-        fun of(value: Int): Balance {
-            return Balance(value)
-        }
-    }
+    infix fun apply(operation: Operation): Balance =
+            when (operation) {
+                is Withdraw -> this withdraw operation.amount
+                is Deposit -> this deposit operation.amount
+            }
 }
 
 operator fun Int.plus(amount: Amount): Int = this + amount.value
